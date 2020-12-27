@@ -1,28 +1,35 @@
 {% load static %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800" rel="stylesheet">
 
-<h2>Katya's Crossword</h2>
-<button>New Crossword</button>
-<button>Solve Crossword</button>
-<div class="crossword-container">
-    <div class="grid-container">
-        {% for row in crossword %}
-            {% for letter in row %}
-                <div class="grid-item {% if not letter %}empty{% endif %}"><div class="content">{{ letter }}</div></div>
+<div class="card">
+    <div class="header-container">
+        <h2>SUNDAY CROSSWORD ☕ 🥓</h2>
+        <span>
+            <button>NEW</button>
+            <button>SOLUTION</button>
+        </span>
+    </div>
+    <div class="crossword-container">
+        <div class="grid-container">
+            {% for row in crossword %}
+                {% for letter in row %}
+                    <div class="grid-item {% if not letter %}empty{% endif %}"><div class="content">{{ letter }}</div></div>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
-    </div>
-    <div class="clues-container">
-        <h3>Across</h3>
-        {% for clue in clues.across %}
-            <p>{{ clue }}</p>
-        {% endfor %}
-    </div>
-    <div class="clues-container">
-        <h3>Down</h3>
-        {% for clue in clues.down %}
-            <p>{{ clue }}</p>
-        {% endfor %}
+        </div>
+        <div class="clues-container">
+            <h3>ACROSS</h3>
+            {% for clue in clues.across %}
+                <p>{{ clue }}</p>
+            {% endfor %}
+        </div>
+        <div class="clues-container">
+            <h3>DOWN</h3>
+            {% for clue in clues.down %}
+                <p>{{ clue }}</p>
+            {% endfor %}
+        </div>
     </div>
 </div>

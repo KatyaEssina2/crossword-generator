@@ -5,7 +5,10 @@ from django.http import HttpResponse
 def index(request):
     # create crossword
     crossword = create_crossword()
-    clues = {"across": ["clue", "clue", "clue"], "down": ["clue", "clue", "clue"]}
+    clues = {
+        "across": ["this is a crossword clue", "clue", "clue"],
+        "down": ["this is a down clue", "clue", "clue"],
+    }
     return render(request, "index.html", {"crossword": crossword, "clues": clues})
 
 
