@@ -12,22 +12,27 @@
         </span>
     </div>
     <div class="crossword-container">
-        <div class="grid-container">
-            {% for row in crossword %}
-                {% for letter in row %}
-                    <div class="grid-item {% if not letter %}empty{% endif %}"><div class="content">{{ letter }}</div></div>
+        <div>
+            <div class="grid-container">
+                {% for letter, gridnum in crossword.grid %}
+                    <div class="grid-item {% if letter == '.' %}empty{% endif %}">
+                        <span class="gridnum">{% if gridnum > 0 %}{{ gridnum }}{% endif %}</span>
+                        <div class="content">
+                            {% if letter != "." %}{{ letter }}{% endif %}
+                        </div>
+                    </div>
                 {% endfor %}
-            {% endfor %}
+            </div>
         </div>
         <div class="clues-container">
             <h3>ACROSS</h3>
-            {% for clue in clues.across %}
+            {% for clue in crossword.clues.across %}
                 <p>{{ clue }}</p>
             {% endfor %}
         </div>
         <div class="clues-container">
             <h3>DOWN</h3>
-            {% for clue in clues.down %}
+            {% for clue in crossword.clues.down %}
                 <p>{{ clue }}</p>
             {% endfor %}
         </div>
