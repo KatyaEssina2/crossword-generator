@@ -7,34 +7,53 @@
     <div class="header-container">
         <h2>SUNDAY CROSSWORD ☕ 🥓</h2>
         <span>
-            <button>NEW</button>
-            <button>SOLUTION</button>
+            <a href="{% url 'index' %}">NEW</a>
+            <button id="show_solution">SOLUTION</button>
         </span>
     </div>
     <div class="crossword-container">
-        <div>
-            <div class="grid-container">
-                {% for letter, gridnum in crossword.grid %}
-                    <div class="grid-item {% if letter == '.' %}empty{% endif %}">
-                        <span class="gridnum">{% if gridnum > 0 %}{{ gridnum }}{% endif %}</span>
-                        <div class="content">
-                            {% if letter != "." %}{{ letter }}{% endif %}
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% else %}
+            <div>
+                <div class="grid-container" style="grid-template-columns: repeat({{ crossword.size.rows }}, 1fr)">
+                    {% for letter, gridnum in crossword.grid %}
+                        <div class="grid-item {% if letter == '.' %}empty{% endif %}">
+                            <span class="gridnum">{% if gridnum > 0 %}{{ gridnum }}{% endif %}</span>
+                            {% if letter != "." %}
+                                <input maxlength="1"/>
+                            {% endif %}
+                            <div class="content hidden">
+                                {% if letter != "." %}{{ letter }}{% endif %}
+                            </div>
                         </div>
-                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clues-container">
+                <h3>ACROSS</h3>
+                {% for clue in crossword.clues.across %}
+                    <p>{{ clue }}</p>
                 {% endfor %}
             </div>
-        </div>
-        <div class="clues-container">
-            <h3>ACROSS</h3>
-            {% for clue in crossword.clues.across %}
-                <p>{{ clue }}</p>
-            {% endfor %}
-        </div>
-        <div class="clues-container">
-            <h3>DOWN</h3>
-            {% for clue in crossword.clues.down %}
-                <p>{{ clue }}</p>
-            {% endfor %}
-        </div>
+            <div class="clues-container">
+                <h3>DOWN</h3>
+                {% for clue in crossword.clues.down %}
+                    <p>{{ clue }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
 </div>
+<script>
+    var solutionBtn = document.getElementById("show_solution");
+    solutionBtn.addEventListener('click', () => {
+        document.querySelectorAll('input').forEach(input => {
+            input.classList.add('hidden');
+        });
+
+        document.querySelectorAll('.content').forEach(solution => {
+            solution.classList.remove('hidden');
+        });
+    });
+</script>

@@ -36,7 +36,6 @@ h3 {
 .grid-container {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(15, 1fr);
   margin: 10px 0px;
   border: 4px solid #FB7454;
   background-color: #FB7454;
@@ -66,6 +65,18 @@ h3 {
   justify-content: center;
 }
 
+input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  color: #301934;
+  border: none;
+  text-align: center; 
+  text-transform: uppercase;
+  border-radius: 6px;
+}
+
 .empty {
   background-color: #FB7454;
 }
@@ -74,6 +85,7 @@ h3 {
   position: absolute;
   font-size: 9px;
   left: 2px;
+  z-index: 100;
 }
 
 .crossword-container {
@@ -86,7 +98,7 @@ h3 {
   padding-left: 40px;
 }
 
-button {
+button, a {
   border-radius: 10px;
   padding: 15px;
   border: none;
@@ -96,17 +108,24 @@ button {
   box-shadow: 1px 5px 8px #bcbcc449;
   letter-spacing: 2px;
   font-weight: 600;
+  text-decoration: none;
 }
 
-button:hover {
+button:hover, a:hover {
   cursor: pointer;
   box-shadow: 1px 5px 8px #bcbcc49c;
   background-color: #fa982e;
   font-weight: 700;
 } 
 
-button:focus {
+button:focus, a:focus {
   outline: none;
 }
 
+.hidden {
+  display: none;
+}
 
+.error {
+  color: #FB7454;
+}
